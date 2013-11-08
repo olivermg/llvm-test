@@ -1,0 +1,4 @@
+void blafn() {
+	printf("AAABBB");
+}
+
