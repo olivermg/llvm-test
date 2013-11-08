@@ -3,18 +3,40 @@ LLC = llc
 AS = llvm-as
 CC = clang
 
-run: test.ll
+
+
+run-bin: test
+	./test
+
+run-ll: test.ll
 	$(LLI) test.ll
 
-runc: compilec
-	$(LLI) testc.s
+run-bc: test.bc
+	$(LLI) test.bc
 
-compile: test.ll
+test.bc: test.ll
 	$(AS) test.ll
+
+test.o: test.ll
+	$(LLC) -filetype=obj test.ll
+
+test.s: test.ll
+	$(LLC) test.ll
+
+test: test.o
+	$(CC) -Wall test.o -o test
+
+
+
+clean:
+	rm -vf test.bc test.o test.s test
+	rm -vf testc.s
+
+
 
 compilec: testc.c
 	$(CC) -S -emit-llvm testc.c
 
-clean:
-	rm -vf test.bc testc.s
+runc: compilec
+	$(LLI) testc.s
 

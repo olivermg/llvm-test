@@ -7,7 +7,7 @@ entry:
 	ret i32 %tmp2
 }
 
-@str = private constant [6 x i8] c"abcd\0a\00"
+@str = private unnamed_addr constant [6 x i8] c"abcd\0a\00"
 
 define i32 @main() {
 myshit:
