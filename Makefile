@@ -1,6 +1,7 @@
 LLI = lli
 LLC = llc
-AS = llvm-as
+LLAS = llvm-as
+AS = as
 CC = clang
 
 
@@ -15,16 +16,16 @@ run-bc: test.bc
 	$(LLI) test.bc
 
 test.bc: test.ll
-	$(AS) test.ll
-
-test.o: test.ll
-	$(LLC) -filetype=obj test.ll
+	$(LLAS) test.ll
 
 test.s: test.ll
 	$(LLC) test.ll
 
+test.o: test.s
+	$(AS) -o test.o test.s
+
 test: test.o
-	$(CC) -Wall test.o -o test
+	$(CC) -v -Wall test.o -o test
 
 
 
