@@ -7,13 +7,31 @@ entry:
 	ret i32 %tmp2
 }
 
-@str = private unnamed_addr constant [6 x i8] c"abcd\0a\00"
+define fastcc i8* @add_ptr(i8* %xp, i8* %yp) {
+entry:
+	%x = load i8* %xp
+	%y = load i8* %yp
+	%sum = add i8 %x, %y
+	%sump = alloca i8
+	store i8 %sum, i8* %sump
+	ret i8* %sump
+}
 
-define i32 @main() {
+@str = private unnamed_addr constant [6 x i8] c"abcd\0a\00"
+@ints = private unnamed_addr constant [2 x i8] [ i8 22, i8 33 ]
+
+define i8 @main() {
 myshit:
 	%res = call fastcc i32 @mul_add(i32 1, i32 2, i32 3)
+
 	%ptr = getelementptr [6 x i8]* @str, i32 0, i32 0
 	call i32 @printf(i8* %ptr)
-	ret i32 %res
+
+	%xp = getelementptr [2 x i8]* @ints, i8 0, i8 0
+	%yp = getelementptr [2 x i8]* @ints, i8 0, i8 1
+	%res2p = call fastcc i8* @add_ptr(i8* %xp, i8* %yp)
+	%res2 = load i8* %res2p
+
+	ret i8 %res2
 }
 
