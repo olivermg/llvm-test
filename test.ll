@@ -27,7 +27,9 @@ myshit:
 	%ptr = getelementptr [6 x i8]* @str, i32 0, i32 0
 	call i32 @printf(i8* %ptr)
 
-	%xp = getelementptr [2 x i8]* @ints, i8 0, i8 0
+	; %xp = getelementptr [2 x i8]* @ints, i8 0, i8 0
+	%xp = alloca i8
+	store i8 11, i8* %xp
 	%yp = getelementptr [2 x i8]* @ints, i8 0, i8 1
 	%res2p = call fastcc i8* @add_ptr(i8* %xp, i8* %yp)
 	%res2 = load i8* %res2p
