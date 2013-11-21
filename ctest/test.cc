@@ -21,10 +21,10 @@ int main(int argc, char* argv[]) {
 
 	llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
 	builder.SetInsertPoint(entry);
-
 	llvm::Value *helloWorld = builder.CreateGlobalStringPtr("hello world!\n");
 
 	builder.CreateCall(putsFunc, helloWorld);
+
 	builder.CreateRetVoid();
 
 	module->dump();
