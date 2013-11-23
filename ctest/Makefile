@@ -1,9 +1,9 @@
 CC = clang
 CXX = clang++
 LLVMCFG = llvm-config
-CFLAGS = -Wall -I`$(LLVMCFG) --includedir` `$(LLVMCFG) --cflags`
-CXXFLAGS = -Wall -I`$(LLVMCFG) --includedir` `$(LLVMCFG) --cxxflags`
-LDFLAGS = -Wall -L`$(LLVMCFG) --libdir` `$(LLVMCFG) --ldflags --libs`
+CFLAGS = -Wall `$(LLVMCFG) --cflags`
+CXXFLAGS = -Wall `$(LLVMCFG) --cxxflags`
+LDFLAGS = -Wall `$(LLVMCFG) --ldflags --libs`
 
 
 
