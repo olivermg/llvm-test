@@ -1,4 +1,5 @@
-declare i32 @printf(i8* nocapture noalias, i64 nocapture noalias)
+; declare i32 @printf(i8* nocapture noalias, i64 nocapture noalias)
+declare i32 @printf(i8*, i64)
 
 define fastcc i32 @mul_add(i32 %x, i32 %y, i32 %z) {
 entry:
