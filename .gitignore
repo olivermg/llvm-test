@@ -4,5 +4,9 @@
 *.bc
 *.s
 *.o
+
 test
+main
+
+phitest/out*.ll
 
