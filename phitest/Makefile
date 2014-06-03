@@ -1,7 +1,7 @@
 CC = clang
 CXX = clang++
-LLVMCFG = llvm-config-3.2
-OPT = opt-3.2
+LLVMCFG = llvm-config
+OPT = opt
 CFLAGS = -Wall `$(LLVMCFG) --cflags`
 LDFLAGS = -Wall `$(LLVMCFG) --ldflags --libs core`
 
@@ -21,14 +21,14 @@ out.ll: main
 	./main >out.ll 2>&1
 
 
-opt-phi: out.ll
-	$(OPT) -S -mem2reg <out.ll >out-opt-mem2reg.ll
+out-phi.ll: out.ll
+	$(OPT) -S -mem2reg <out.ll >out-phi.ll
 
-opt-cfg: out.ll
-	$(OPT) -S -simplifycfg <out.ll >out-opt-simplifycfg.ll
+out-cfg.ll: out.ll
+	$(OPT) -S -simplifycfg <out.ll >out-cfg.ll
 
-opt-o1: out.ll
-	$(OPT) -S -O1 <out.ll >out-opt-o1.ll
+out-o1.ll: out.ll
+	$(OPT) -S -O1 <out.ll >out-o1.ll
 
 
 clean:
